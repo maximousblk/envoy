@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/github/([^/]+)/(.+)",
+      "destination": "/api/github?slug=$1/$2"
+    },
+    {
+      "source": "/gitlab/([^/]+)/(.+)",
+      "destination": "/api/gitlab?slug=$1/$2"
+    },
+    {
+      "source": "/bitbucket/([^/]+)/(.+)",
+      "destination": "/api/bitbucket?slug=$1/$2"
+    },
+    {
+      "source": "/nest/(.+)",
+      "destination": "/api/nest?slug=$1"
+    },
+    {
+      "source": "/x/(.+)",
+      "destination": "/api/x?slug=$1"
+    },
+    {
+      "source": "/std/(.+)",
+      "destination": "/api/std?slug=$1"
+    }
+  ]
+}
