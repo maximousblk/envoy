@@ -1,4 +1,5 @@
 import { NextApiHandler, NextApiResponse } from 'next'
+import fetch from "node-fetch";
 
 const MATCHER = /^([^\/]+)\/([^\/@]+)(@)?(.*)/
 
@@ -20,11 +21,18 @@ const handler: NextApiHandler = async (req, res) => {
     return invalidURL(res)
   }
   const version: string = versionSpecified ? '' : 'master'
-  const filepath: string = rest || '/mod.ts'
-  const Location: string = `https://raw.githubusercontent.com/${owner}/${repo}/${version}${filepath}`
-  res.status(301)
-  res.setHeader('Location', Location)
-  res.end()
+  const Location: string = `https://raw.githubusercontent.com/${owner}/${repo}/${version}${rest}`
+  const headers: {} = Object.fromEntries(
+    Object.entries(req.headers).filter(([k]) => {
+      return !["host"].some((h) => h == k);
+    }),
+  );
+
+  const data = await fetch(Location, { headers })
+  const text = await data.text()
+
+  res.status(data.status)
+  res.end(text)
 }
 
 export default handler

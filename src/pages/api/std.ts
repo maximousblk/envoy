@@ -1,4 +1,5 @@
 import { NextApiHandler, NextApiResponse } from 'next'
+import fetch from "node-fetch";
 
 const MATCHER = /^([^\/@]+)(@[^\/]+)?(.*)/
 
@@ -15,16 +16,30 @@ const handler: NextApiHandler = async (req, res) => {
   if (!m) {
     return invalidURL(res)
   }
-  const [, moduleName, specifiedVersion, rest] = m
+  const [, moduleName, specifiedVersion, filepath] = m
   if (!moduleName) {
     return invalidURL(res)
   }
   const version: string = specifiedVersion ? specifiedVersion : ''
-  const filepath: string = rest || '/mod.ts'
   const Location: string = `https://deno.land/std${version}/${moduleName}${filepath}`
-  res.status(301)
-  res.setHeader('Location', Location)
-  res.end()
+  const headers: {} = Object.fromEntries(
+    Object.entries(req.headers).filter(([k]) => {
+      return !["host"].some((h) => h == k);
+    }),
+  );
+
+  if (!filepath) {
+    res.status(301)
+    res.setHeader("x-deno-warning", `Implicitly using "mod.ts" as entry file for ${moduleName}${version}`);
+    res.setHeader('Location', `${moduleName}${version}/mod.ts`)
+    res.end()
+  }
+
+  const data = await fetch(Location, { headers })
+  const text = await data.text()
+
+  res.status(data.status)
+  res.end(text)
 }
 
 export default handler
