@@ -22,11 +22,6 @@ const handler: NextApiHandler = async (req, res) => {
   }
   const version: string = specifiedVersion ? specifiedVersion : ''
   const Location: string = `https://deno.land/x/${moduleName}${version}${filepath}`
-  const headers: {} = Object.fromEntries(
-    Object.entries(req.headers).filter(([k]) => {
-      return !["host"].some((h) => h == k);
-    }),
-  );
 
   if (!filepath) {
     res.status(301)
@@ -35,9 +30,10 @@ const handler: NextApiHandler = async (req, res) => {
     res.end()
   }
 
-  const data = await fetch(Location, { headers })
+  const data = await fetch(Location)
   const text = await data.text()
 
+  res.setHeader('Cache-Control', ['s-maxage=86400', 'stale-if-error=1', 'immutable'])
   res.status(data.status)
   res.end(text)
 }

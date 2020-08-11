@@ -22,15 +22,11 @@ const handler: NextApiHandler = async (req, res) => {
   }
   const version: string = versionSpecified ? '' : 'master'
   const Location: string = `https://bitbucket.org/${owner}/${repo}/raw/${version}${rest}`
-  const headers: {} = Object.fromEntries(
-    Object.entries(req.headers).filter(([k]) => {
-      return !["host"].some((h) => h == k);
-    }),
-  );
 
-  const data = await fetch(Location, { headers })
+  const data = await fetch(Location)
   const text = await data.text()
 
+  res.setHeader('Cache-Control', ['s-maxage=86400', 'stale-if-error=1', 'immutable'])
   res.status(data.status)
   res.end(text)
 }
