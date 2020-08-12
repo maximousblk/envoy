@@ -109,6 +109,14 @@ export default () => {
           <Span bg="bg-black">repo or repo@tag</Span>/
           <Span bg="bg-black">path/to/file</Span>
         </div>
+        <div className="my-5 text-lg">For Github Gists:</div>
+        <div className="my-5 text-gray-400">
+          <Span leading bg="bg-green-500">
+            https://envoy.now.sh/gist
+          </Span>
+          /<Span bg="bg-black">gist-id or gist-id@revision-id</Span>/
+          <Span bg="bg-black">path/to/file</Span>
+        </div>
         <div className="my-5 text-lg">For nest.land:</div>
         <div className="my-5 text-gray-400">
           <Span leading bg="bg-green-500">
