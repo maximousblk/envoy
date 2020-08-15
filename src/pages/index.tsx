@@ -83,6 +83,9 @@ export default () => {
         <div className="my-5 text-xl">
           P.S. <a href="https://github.com/justablob" target="_blank" >blob</a> did not approve of the proxying method
         </div>
+        <div className="my-5 text-xl">
+          P.S. update: blob may change his mind...
+        </div>
         <br />
         <div className="my-5 text-xl">Usage:</div>
         <div className="my-5 text-lg">For GitHub:</div>
