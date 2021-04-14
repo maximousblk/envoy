@@ -2,7 +2,7 @@
   "version": 1,
   "registries": [
     {
-      "schema": "nest/:module([a-zA-Z0-9_]*)@:version/:path*",
+      "schema": "/nest/:module([a-zA-Z0-9_]*)@:version/:path*",
       "variables": [
         {
           "key": "module",
