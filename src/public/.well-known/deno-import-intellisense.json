@@ -14,7 +14,7 @@
         },
         {
           "key": "path",
-          "url": "https://intellisense.nest.land/api/x/${module}/${version}/paths"
+          "url": "https://intellisense.nest.land/api/x/${module}/${version}"
         }
       ]
     },
