@@ -1,5 +1,11 @@
 {
   "version": 2,
+  "redirects": [
+    {
+      "source": "/.well-known/deno-import-intellisense.json",
+      "destination": "https://raw.githubusercontent.com/maximousblk/envoy/master/src/public/.well-known/deno-import-intellisense.json"
+    }
+  ],
   "rewrites": [
     {
       "source": "/github/([^/]+)/(.+)",
