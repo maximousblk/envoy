@@ -47,28 +47,6 @@
           "url": "https://deno.land/_vsc1/modules/${module}/v_latest"
         }
       ]
-    },
-    {
-      "schema": "/std@:version?/:path*",
-      "variables": [
-        {
-          "key": "version",
-          "url": "https://deno.land/_vsc1/modules/std"
-        },
-        {
-          "key": "path",
-          "url": "https://deno.land/_vsc1/modules/std/v/${{version}}"
-        }
-      ]
-    },
-    {
-      "schema": "/std/:path*",
-      "variables": [
-        {
-          "key": "path",
-          "url": "https://deno.land/_vsc1/modules/std/v_latest"
-        }
-      ]
     }
   ]
 }
